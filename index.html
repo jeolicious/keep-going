@@ -242,6 +242,33 @@
       document.getElementById('letterBox').classList.toggle('open', isOpen);
     }
   </script>
+<!-- Background Music -->
+<audio id="bgMusic" autoplay loop>
+    <source src="les.mp3" type="audio/mpeg">
+</audio>
 
+<script>
+const music = document.getElementById("bgMusic");
+
+// Start quietly
+music.volume = 0;
+
+// Wait until the page is interacted with (required by some browsers)
+window.addEventListener("click", () => {
+    music.play();
+
+    // Smooth fade-in
+    let volume = 0;
+    const fade = setInterval(() => {
+        if (volume < 1) {
+            volume += 0.02; // speed of fade
+            music.volume = Math.min(volume, 1);
+        } else {
+            clearInterval(fade);
+        }
+    }, 120); // lower = faster fade
+}, { once: true });
+</script>
+  
 </body>
 </html>
